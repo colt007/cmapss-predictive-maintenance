@@ -1,5 +1,8 @@
 name: MLOps CI Pipeline
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [ "main" ]
@@ -14,22 +17,23 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Set up Python 3.10
+    - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: "3.10"
-        cache: 'pip'
+        python-version: "3.12"
+        cache: pip
+        cache-dependency-path: |
+          requirements_prod.txt
+          requirements_test.txt
 
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        # Force CPU-only PyTorch to keep the cloud runner fast and lightweight
-        pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu
-        pip install pytest
+        python -m pip install -r requirements_test.txt
 
     - name: Execute Defensive Test Suite
       run: |
-        pytest tests/ -v
+        python -m pytest tests/ -v
 
     - name: Verify Docker Build
       run: |
