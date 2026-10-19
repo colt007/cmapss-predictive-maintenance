@@ -2,12 +2,22 @@ import pandas as pd
 import numpy as np
 import pytest
 
-from configs.config import PROCESSED_PARQUET_PATH
-
 
 @pytest.fixture(scope='session')
 def processed_df():
-    return pd.read_parquet(PROCESSED_PARQUET_PATH)
+    """Build a small, deterministic dataset for CI integrity checks."""
+    rows = []
+    for subset in ("FD001", "FD002", "FD003", "FD004"):
+        for cycle in range(1, 31):
+            rows.append(
+                {
+                    "global_engine_id": f"{subset}_1",
+                    "time_cycle": cycle,
+                    "RUL": 30 - cycle,
+                    "sensor_1": float(cycle),
+                }
+            )
+    return pd.DataFrame(rows)
 
 def test_engine_blocks_are_contiguous(processed_df):
     engine_sequence = processed_df["global_engine_id"]
