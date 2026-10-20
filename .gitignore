@@ -6,13 +6,17 @@ node_modules/
 ml_aerospace_pipeline
 aerospace_mle
 datasets
-models
+/models/
 .dockerignore
-dockerfile
 requirements.txt
 src/serve/inv_cov.npy
 src/serve/mu.npy
 src/serve/condition_matrices.pkl
-configs/
 mlflow.db
+mlruns
+docs
+evidence_scripts
+EXP001_article_for_medium_devto_hashnode.zip
+iwMNUDMNHVcOzSiX2Ffm2vksbiO21qjyxQTSL40HD3vxEBY6i_x6gnxd7tzbE_itp0zkpQKvXYzcQXXqbV6WfULrbbVv5P4ddcUivCEHn52LGDdrfzXTossK6F9oxz6lv6P00wzppxk4_9Jy-YpEzFtAMB5SgbM8nae71ja5X_uOLTxhiYKryQTEtl43RieO.jpg
+
 

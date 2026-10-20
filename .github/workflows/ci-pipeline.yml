@@ -37,4 +37,4 @@ jobs:
 
     - name: Verify Docker Build
       run: |
-        docker build -t cmapss-api-inference-test-3 .
+        docker build --target ci -t cmapss-api-inference-test-3 .
